@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum JobStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum JobPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model Tenant {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  users User[]
+  jobs  Job[]
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  role UserRole @default(USER)
+
+  // Tenant Relationship
+  tenantId Int
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+}
+
+model Job {
+  id Int @id @default(autoincrement())
+
+  // Basic Details
+  title       String
+  description String?
+  type        String
+
+  // Queue Metadata
+  status   JobStatus   @default(PENDING)
+  priority JobPriority @default(MEDIUM)
+
+  queue String @default("default")
+
+  // Job Data
+  payload Json
+
+  // Retry Count
+  attempts Int @default(0)
+
+  // Delayed Execution
+  scheduledAt DateTime?
+
+  // Tenant Relationship
+  tenantId Int
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([status])
+  @@index([priority])
+  @@index([queue])
+}
