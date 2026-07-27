@@ -9,6 +9,7 @@ function getRedis() {
         redis = new IORedis({
             host: env.REDIS_HOST,
             port: env.REDIS_PORT,
+            tls: {}, 
             maxRetriesPerRequest: null,
         });
 

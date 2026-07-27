@@ -10,7 +10,8 @@ const envSchema = z.object({
     REDIS_HOST: z.string(),
 
     REDIS_PORT: z.coerce.number(),
-
+    REDIS_PASSWORD: z.string(),
+    
     NODE_ENV: z
         .enum(["development", "production", "test"])
         .default("development"),
