@@ -1,4 +1,3 @@
-version: "3.8"
 
 services:
   postgres:
@@ -23,7 +22,32 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  api:
+    build:
+      context: .
+      dockerfile: DockerFile
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy    
+      
 
+  worker:
+    build:
+      context: .
+      dockerfile: DockerFile.worker
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+  
   redis:
     image: redis:7-alpine
     container_name: queueforge_redis

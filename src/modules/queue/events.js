@@ -1,21 +1,29 @@
 const { QueueEvents } = require("bullmq");
+const getRedis = require("../../config/redis");
+const logger = require("../../config/logger");
 
-const redis = require("../../config/redis");
+let events;
 
-const events = new QueueEvents("job-queue", {
-    connection: redis,
-});
+function getQueueEvents() {
+    if (!events) {
+        events = new QueueEvents("job-queue", {
+            connection: getRedis(),
+        });
 
-events.on("completed", ({ jobId }) => {
-    console.log(`✅ ${jobId} completed`);
-});
+        events.on("completed", ({ jobId }) => {
+            logger.info({ jobId }, "Job completed");
+        });
 
-events.on("failed", ({ jobId, failedReason }) => {
-    console.log(`❌ ${jobId} failed`);
+        events.on("failed", ({ jobId, failedReason }) => {
+            logger.error({ jobId, reason: failedReason }, "Job failed");
+        });
 
-    console.log(failedReason);
-});
+        events.on("waiting", ({ jobId }) => {
+            logger.info({ jobId }, "Job waiting");
+        });
+    }
 
-events.on("waiting", ({ jobId }) => {
-    console.log(`⌛ ${jobId} waiting`);
-});
+    return events;
+}
+
+module.exports = getQueueEvents;

@@ -26,9 +26,9 @@ enum JobPriority {
 }
 
 model Tenant {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  slug      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

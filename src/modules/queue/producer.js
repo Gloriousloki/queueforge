@@ -1,5 +1,5 @@
-const jobQueue = require("./queue");
-
+const getQueue = require("./queue");
+const logger = require("../../config/logger");
 const addJob = async (job) => {
 
     const delay = job.scheduledAt
@@ -12,7 +12,7 @@ const addJob = async (job) => {
         LOW: 10,
     };
 
-    const queuedJob = await jobQueue.add(
+    const queuedJob = await getQueue().add(
         job.type,
         job,
         {
@@ -27,12 +27,15 @@ const addJob = async (job) => {
 
             delay,
 
-            removeOnComplete: true,
+            removeOnComplete: { age: 3600 },
             removeOnFail: false,
         }
     );
 
-    console.log(`✅ Job ${queuedJob.id} added to queue`);
+    logger.info(
+    { jobId: queuedJob.id },
+    "Job added to queue"
+);
 };
 
 module.exports = {
