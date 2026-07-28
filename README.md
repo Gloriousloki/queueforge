@@ -1,3 +1,16 @@
+![Node.js](https://img.shields.io/badge/Node.js-20-green)
+
+![Express](https://img.shields.io/badge/Express-Backend-blue)
+
+![Redis](https://img.shields.io/badge/Redis-BullMQ-red)
+
+![Prisma](https://img.shields.io/badge/Prisma-ORM-black)
+
+![Docker](https://img.shields.io/badge/Docker-Container-blue)
+
+![License](https://img.shields.io/badge/License-MIT-green)
+
+![CI](https://img.shields.io/badge/GitHub_Actions-Passing-success)
 # QueueForge
 
 > A scalable multi-tenant distributed job queue platform built using Node.js, BullMQ, Redis, PostgreSQL, and Docker.
@@ -5,6 +18,111 @@
 QueueForge is a production-inspired backend system that enables asynchronous job processing for modern applications. It provides secure authentication, multi-tenant isolation, priority-based job scheduling, and distributed worker processing using BullMQ and Redis.
 
 The platform follows an event-driven architecture where API servers focus on handling client requests while background workers process long-running tasks independently. This design improves scalability, reliability, and responsiveness.
+
+---
+#  Project Showcase
+
+##  System Architecture
+
+The following diagram illustrates the overall architecture of QueueForge, showing how the REST API, Redis queue, BullMQ worker, and PostgreSQL database work together to process background jobs asynchronously.
+
+<p align="center">
+    <img src="assets/system_architecture.png" width="100%">
+</p>
+
+---
+
+##  Interactive API Documentation
+
+QueueForge provides a fully documented REST API using Swagger (OpenAPI 3.0).
+
+Features include:
+
+- User Registration
+- User Login
+- JWT Authentication
+- Create Job
+- Get Jobs
+- Update Job
+- Delete Job
+
+<p align="center">
+    <img src="assets/ss4.png" width="100%">
+</p>
+
+---
+
+##  Docker Deployment
+
+The application is fully containerized using Docker Compose.
+
+Running containers include:
+
+- Express API
+- Background Worker
+- PostgreSQL Database
+- Redis Server
+
+<p align="center">
+    <img src="assets/ss3.png" width="100%">
+</p>
+
+---
+
+##  JWT Authentication
+
+All protected endpoints require a valid JWT Bearer Token before accessing secured resources.
+
+<p align="center">
+    <img src="assets/ss5.png" width="100%">
+</p>
+
+---
+
+##  Create Job API
+
+Create a new background processing job using the REST API.
+
+<p align="center">
+    <img src="assets/ss6.png" width="100%">
+</p>
+
+---
+
+##  Delete Job API
+
+Delete an existing queued job.
+
+<p align="center">
+    <img src="assets/ss7.png" width="100%">
+</p>
+
+---
+
+##  Bull Dashboard
+
+Monitor queue statistics in real time, including waiting, active, completed, failed, delayed, and paused jobs.
+
+<p align="center">
+    <img src="assets/ss8.png" width="100%">
+</p>
+
+---
+
+##  Job Details
+
+Inspect individual jobs, including:
+
+- Payload
+- Priority
+- Status
+- Attempts
+- Logs
+- Processing Timeline
+
+<p align="center">
+    <img src="assets/ss9.png" width="100%">
+</p>
 
 ---
 
