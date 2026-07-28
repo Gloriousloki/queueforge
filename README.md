@@ -1,16 +1,15 @@
-![Node.js](https://img.shields.io/badge/Node.js-20-green)
+<p align="center">
 
-![Express](https://img.shields.io/badge/Express-Backend-blue)
-
-![Redis](https://img.shields.io/badge/Redis-BullMQ-red)
-
-![Prisma](https://img.shields.io/badge/Prisma-ORM-black)
-
-![Docker](https://img.shields.io/badge/Docker-Container-blue)
-
+![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-Backend-000000?logo=express)
+![BullMQ](https://img.shields.io/badge/BullMQ-Queue-EA4335)
+![Redis](https://img.shields.io/badge/Redis-Message_Broker-DC382D?logo=redis&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-4169E1?logo=postgresql&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma)
+![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-![CI](https://img.shields.io/badge/GitHub_Actions-Passing-success)
+</p>
 # QueueForge
 
 > A scalable multi-tenant distributed job queue platform built using Node.js, BullMQ, Redis, PostgreSQL, and Docker.
